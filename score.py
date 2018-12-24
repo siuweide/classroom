@@ -13,9 +13,9 @@ for line in scores_data:
         sum_score += int(line[data+1])
         #将所有学生的每个科目的成绩分别求和
         total_score[data+1] += int(line[data+1])
-        # if int(data) < 60:
-        #     #分数小于60分的话，值改为不及格
-        #     line[line.index(data)] = '不及格'
+        if int(data) < 60:
+            #分数小于60分的话，值改为不及格
+            line[line.index(data)] = '不及格'
     #记录每个学生的总成绩
     sum_result = sum_score
     #记录每个学生的平均分
@@ -27,7 +27,6 @@ for line in scores_data:
 
 #统计学生的总成绩，由高到低排
 scores_data = sorted(scores_data,key=lambda x:x[11],reverse=True)
-print(len(scores_data))
 #生成新的列表，汇总每一科目的平均分
 total_score = ['%.1f' %(x/len(scores_data)) for x in total_score[1:]]
 #将列表的内容转化为浮点类型
@@ -56,7 +55,6 @@ for i in range(len(scores_data)):
 scores_results = [scores_title] + [total_score] + scores_data
 
 new_str_results = []
-
 for result in scores_results:
     #新建一个列表，将列表内含有int的，全部转换为str类型
     str_list_results = [str(x) for x in result]
