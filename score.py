@@ -13,9 +13,9 @@ for line in scores_data:
         sum_score += int(line[data+1])
         #将所有学生的每个科目的成绩分别求和
         total_score[data+1] += int(line[data+1])
-        if int(data) < 60:
+        if int(line[data+1]) < 60:
             #分数小于60分的话，值改为不及格
-            line[line.index(data)] = '不及格'
+            line[data+1]= '不及格'
     #记录每个学生的总成绩
     sum_result = sum_score
     #记录每个学生的平均分
