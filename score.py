@@ -8,14 +8,14 @@ scores_data = scores[1:] #内容
 
 for line in scores_data:
     sum_score = 0
-    for data in line[1:]:
+    for data in range(len(line[1:])):
         #将每一项学生的的科目成绩求和
-        sum_score += int(data)
+        sum_score += int(line[data+1])
         #将所有学生的每个科目的成绩分别求和
-        total_score[line.index(data)] += int(data)
-        if int(data) < 60:
-            #分数小于60分的话，值改为不及格
-            line[line.index(data)] = '不及格'
+        total_score[data+1] += int(line[data+1])
+        # if int(data) < 60:
+        #     #分数小于60分的话，值改为不及格
+        #     line[line.index(data)] = '不及格'
     #记录每个学生的总成绩
     sum_result = sum_score
     #记录每个学生的平均分
@@ -25,20 +25,22 @@ for line in scores_data:
     #将平均分写入到内容当中
     line.append(avg_result)
 
-#统计学生的总成绩，有高到低排
+#统计学生的总成绩，由高到低排
 scores_data = sorted(scores_data,key=lambda x:x[11],reverse=True)
+print(len(scores_data))
 #生成新的列表，汇总每一科目的平均分
 total_score = ['%.1f' %(x/len(scores_data)) for x in total_score[1:]]
 #将列表的内容转化为浮点类型
 total_score = [float(x) for x in total_score]
 #汇总每个科目的平均分，然后添加进列表里
-total_score.append(sum(total_score[:]))
+total_score.append('%.1f' %(sum(total_score[:])))
 #求出总平均分，然后添加到列表里
 total_score.append('%.1f' %(sum(total_score[:-1])/9))
 #将0的序号添加到汇总每一科目的总成绩前面
 total_score.insert(0,0)
 #将平均的列插入到汇总成绩里面
 total_score.insert(1,'平均')
+
 #在标题前面添加名次列
 scores_title.insert(0,'名次')
 #在标题后面添加总分列
@@ -52,9 +54,9 @@ for i in range(len(scores_data)):
 
 # 将标题和学生成绩情况相加起来合并成一个新的列表
 scores_results = [scores_title] + [total_score] + scores_data
-# print(scores_results)
 
 new_str_results = []
+
 for result in scores_results:
     #新建一个列表，将列表内含有int的，全部转换为str类型
     str_list_results = [str(x) for x in result]
