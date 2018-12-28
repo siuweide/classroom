@@ -18,8 +18,8 @@ def get_image(threadName):
             for data in response.iter_content(128):
                 file.write(data)
 try:
-    _thread.start_new_thread(get_photo, ('Thread-1',))
-    _thread.start_new_thread(get_photo, ('Thread-2',))
+    _thread.start_new_thread(get_image, ('Thread-1',))
+    _thread.start_new_thread(get_image, ('Thread-2',))
 except:
     print("Error: unable to start thread")
 
