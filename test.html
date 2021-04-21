@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+    function playGame() {
+        const rows = [ Array(3), Array(5), Array(7) ];
+        let userA = null;
+        let userB = null;
+        let round = 1;
+        for(var i=0; i<3; i++){
+            // 随机一行
+            const row = rows[Math.floor((Math.random()*rows.length))];
+            const row_index = rows.indexOf(row);
+            alert(`第${round}回合，总共有${row.length}根火柴`);
+            while (row.length > 0) {
+                // userA取火柴
+                const userATakeOut = prompt(`userA，从${row.length}根火柴中取几根?`);
+                if(userATakeOut > row.length || userATakeOut < 0) {
+                    alert(`你已超出取火柴的范围，退出程序`);
+                    return;
+                }
+                userA = row.splice(row.length - userATakeOut, userATakeOut);
+                alert(`userA取了${userATakeOut}根火柴,还剩余火柴数量: ${row.length}`);
+                // check
+                if (!row.length) {
+                    alert('user A输了');
+                    break;
+                }
+
+                // userB取火柴
+                const userBTakeOut = prompt(`userB，从${row.length}根火柴中取几根?`);
+                if(userBTakeOut > row.length || userATakeOut < 0) {
+                    alert(`你已超出取火柴的范围，退出程序`);
+                    return;
+                }
+                userB = row.splice(row.length - userBTakeOut, userBTakeOut);
+                alert(`userB 取出数量: ${userBTakeOut}, 还剩余火柴数量: ${row.length}`);
+                // check
+                if (!row.length) {
+                    alert('userB 输了');
+                    break;
+                }
+            }
+            rows.splice(row_index, 1);
+            round += 1
+        }
+        alert('游戏结束')
+    }
+
+    playGame();
+
+
+</script>
+</html>
